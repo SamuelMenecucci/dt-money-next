@@ -1,4 +1,3 @@
-import { Inter } from "@next/font/google";
 import { Header } from "@/components/Header";
 import { Summary } from "@/components/Summary";
 import { TransactionsTable } from "@/components/TransactionsTable";
