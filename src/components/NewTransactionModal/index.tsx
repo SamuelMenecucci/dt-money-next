@@ -1,5 +1,4 @@
 import { api } from "@/services/api";
-import axios from "axios";
 import { FormEvent, useState } from "react";
 import Modal from "react-modal";
 import {
@@ -27,19 +26,21 @@ export function NewTransactionModal({
   const [type, setType] = useState("");
   const [category, setCategory] = useState("");
 
-  function handleCreateNewTransaction(e: FormEvent) {
+  async function handleCreateNewTransaction(e: FormEvent) {
     e.preventDefault();
 
     if (!title || !value || !type || !category) {
       return alert("preencha todos os campos, caralho");
     }
 
-    api.post("new-transaction", {
+    await api.post("new-transaction", {
       title,
       value,
       type,
       category,
     });
+
+    window.location.reload();
   }
 
   return (
@@ -72,12 +73,18 @@ export function NewTransactionModal({
           />
 
           <TransactionType>
-            <TransactionTypeButton onClick={() => setType("income")}>
+            <TransactionTypeButton
+              type="button"
+              onClick={() => setType("income")}
+            >
               <img src="/assets/income.svg" alt="" />
               Income
             </TransactionTypeButton>
 
-            <TransactionTypeButton onClick={() => setType("withdraw")}>
+            <TransactionTypeButton
+              type="button"
+              onClick={() => setType("withdraw")}
+            >
               <img src="/assets/withdraw.svg" alt="" />
               Withdraw
             </TransactionTypeButton>
