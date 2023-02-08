@@ -17,7 +17,7 @@ export const CloseButton = styled.button`
   }
 `;
 
-export const Content = styled.div`
+export const Form = styled.form`
   padding: 4rem 3rem;
 `;
 
