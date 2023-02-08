@@ -1,6 +1,14 @@
+import { api } from "@/services/api";
+import { useEffect, useState } from "react";
 import { Container } from "./styles";
 
 export function TransactionsTable() {
+  const [transactions, setTransactions] = useState<any>([]);
+
+  useEffect(() => {
+    api.get("/get-transactions").then((res) => setTransactions(res.data));
+  }, []);
+
   return (
     <Container>
       <table>
@@ -14,19 +22,14 @@ export function TransactionsTable() {
         </thead>
 
         <tbody>
-          <tr>
-            <td>Desenvolvimento site </td>
-            <td>R$ 12.000 </td>
-            <td>Venda </td>
-            <td>1/01/2023 </td>
-          </tr>
-
-          <tr>
-            <td>Desenvolvimento site </td>
-            <td>R$ 12.000 </td>
-            <td>Venda </td>
-            <td>1/01/2023 </td>
-          </tr>
+          {transactions?.map((element: any, index: number) => (
+            <tr key={index}>
+              <td>{element.title}</td>
+              <td>{element.value}</td>
+              <td>{element.category}</td>
+              <td>{element.date}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Container>

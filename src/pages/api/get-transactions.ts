@@ -6,18 +6,21 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const result: any = await fauna.query(
-    q.Map(
-      q.Paginate(q.Documents(q.Collection("transactions"))),
-      q.Lambda((x) => q.Get(x))
-    )
-  );
+  if (req.method === "GET") {
+    const result: any = await fauna.query(
+      q.Map(
+        q.Paginate(q.Documents(q.Collection("transactions"))),
+        q.Lambda((x) => q.Get(x))
+      )
+    );
 
-  const allData = result.data.map((element: any) => {
-    return element.data;
-  });
+    const allData = result.data.map((element: any) => {
+      return element.data;
+    });
 
-  console.log(allData);
-
-  res.status(200).json({ data: allData });
+    res.status(200).json(allData);
+  } else {
+    res.setHeader("Allow", "Get");
+    res.status(450).end("Method not allowed");
+  }
 }
