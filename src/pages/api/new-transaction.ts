@@ -3,13 +3,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { fauna } from "@/services/fauna";
 import { query as q } from "faunadb";
 
-type Data = {
-  name: string;
-};
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
   const { title, value, type, category } = req.body;
 
@@ -20,11 +16,16 @@ export default async function handler(
     category,
   };
 
-  fauna.query(
-    q.Create(q.Collection("transactions"), {
-      data: transaction,
-    })
-  );
+  if (req.method === "POST") {
+    fauna.query(
+      q.Create(q.Collection("transactions"), {
+        data: transaction,
+      })
+    );
 
-  res.status(200).json({ name: "John Doe" });
+    res.status(200).json({ name: "John Doe" });
+  } else {
+    res.setHeader("Allow", "Post");
+    res.status(450).end("Method not allowed");
+  }
 }
