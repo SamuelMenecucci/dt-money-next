@@ -30,7 +30,7 @@ export function NewTransactionModal({
     e.preventDefault();
 
     if (!title || !value || !type || !category) {
-      return alert("preencha todos os campos, caralho");
+      return alert("Por favor, preencha todos os campos");
     }
 
     await api.post("new-transaction", {
@@ -39,6 +39,8 @@ export function NewTransactionModal({
       type,
       category,
     });
+
+    onRequestClose();
 
     window.location.reload();
   }
@@ -66,7 +68,7 @@ export function NewTransactionModal({
           />
 
           <Input
-            type="text"
+            type="number"
             placeholder="Value"
             value={value}
             onChange={(e) => setValue(e.target.value)}

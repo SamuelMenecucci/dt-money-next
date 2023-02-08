@@ -1,12 +1,12 @@
 import { create } from "zustand";
 
-type useModalStoreType = {
+type useTransactionsStoreType = {
   isOpen: boolean;
   handleOpenNewTransactionModal: () => void;
   handleCloseNewTransactionModal: () => void;
 };
 
-export const useModal = create<useModalStoreType>((set) => ({
+export const useTransactionsStore = create<useTransactionsStoreType>((set) => ({
   isOpen: false,
   handleOpenNewTransactionModal: () => set(() => ({ isOpen: true })),
   handleCloseNewTransactionModal: () => set(() => ({ isOpen: false })),
