@@ -33,7 +33,14 @@ export function TransactionsTable() {
                 }).format(element.value)}
               </td>
               <td>{element.category}</td>
-              <td>{element.date}</td>
+              <td>
+                {new Date(element.date).toLocaleString("pt-BR", {
+                  timeZone: "utc",
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })}
+              </td>
             </tr>
           ))}
         </tbody>
