@@ -26,7 +26,12 @@ export function TransactionsTable() {
           {transactions?.map((element: any, index: number) => (
             <tr key={index}>
               <td>{element.title}</td>
-              <td>{element.value}</td>
+              <td className={element.type}>
+                {new Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                }).format(element.value)}
+              </td>
               <td>{element.category}</td>
               <td>{element.date}</td>
             </tr>
