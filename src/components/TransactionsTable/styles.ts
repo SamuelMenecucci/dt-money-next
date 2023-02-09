@@ -27,6 +27,15 @@ export const Container = styled.div`
         td {
           padding: 1rem 2rem;
           color: #969cb2;
+
+          &.income {
+            color: #33cc95;
+          }
+
+          &.withdraw {
+            color: #e52e4d;
+          }
+
           &:first-child {
             color: #363f5f;
           }

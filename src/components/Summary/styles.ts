@@ -18,6 +18,7 @@ export const SummaryItem = styled.div`
 
   &:last-child {
     background-color: #33cc95;
+    color: white;
   }
 `;
 

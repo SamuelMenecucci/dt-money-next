@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-  background-color: #5429cc;
+  /* background-color: #5429cc; */
+  background-color: #ed1941;
   height: 13.25rem;
   width: 100%;
 `;
@@ -18,7 +19,7 @@ export const Content = styled.div`
 export const NewTransactionButton = styled.button`
   padding: 0.75rem 2rem;
   border: none;
-  background-color: #6933ff;
+  background-color: #f32874;
   color: white;
   border-radius: 8px;
 
