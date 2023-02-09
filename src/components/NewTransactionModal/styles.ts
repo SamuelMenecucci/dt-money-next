@@ -39,6 +39,19 @@ export const Input = styled.input`
   }
 `;
 
+export const SelectInput = styled.select`
+  width: 100%;
+  padding: 1.2rem;
+  height: 4rem;
+  background-color: #e7e9ee;
+  border: 1px solid rgba(215, 215, 215, 1);
+  border-radius: 0.5rem;
+
+  & + & {
+    margin-top: 1rem;
+  }
+`;
+
 export const TransactionType = styled.div`
   width: 100%;
   display: flex;

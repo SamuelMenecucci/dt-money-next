@@ -7,6 +7,7 @@ import {
   Form,
   Input,
   RegisterButton,
+  SelectInput,
   Title,
   TransactionType,
   TransactionTypeButton,
@@ -23,6 +24,7 @@ export function NewTransactionModal({
 }: NewTransactionModalProps) {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
+  const [date, setDate] = useState("");
   const [type, setType] = useState("");
   const [category, setCategory] = useState("");
 
@@ -38,12 +40,22 @@ export function NewTransactionModal({
       value,
       type,
       category,
+      date,
     });
 
     onRequestClose();
 
     window.location.reload();
   }
+
+  const categoryValues = [
+    { label: "Food", value: "food" },
+    { label: "Transport", value: "transport" },
+    { label: "Fun", value: "fun" },
+    { label: "Streaming", value: "streaming" },
+    { label: "Home", value: "home" },
+    { label: "Pet", value: "pet" },
+  ];
 
   return (
     <Modal
@@ -74,6 +86,13 @@ export function NewTransactionModal({
             onChange={(e) => setValue(e.target.value)}
           />
 
+          <Input
+            type="date"
+            placeholder="Value"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+
           <TransactionType>
             <TransactionTypeButton
               type="button"
@@ -92,12 +111,20 @@ export function NewTransactionModal({
             </TransactionTypeButton>
           </TransactionType>
 
-          <Input
-            type="text"
-            placeholder="Category"
+          <SelectInput
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-          />
+          >
+            <option value="" selected disabled>
+              Category
+            </option>
+
+            {categoryValues.map((element, index) => (
+              <option key={index} value={element.value}>
+                {element.label}
+              </option>
+            ))}
+          </SelectInput>
 
           <RegisterButton type="submit">Register</RegisterButton>
         </Form>

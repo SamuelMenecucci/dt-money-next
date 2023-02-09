@@ -7,13 +7,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { title, value, type, category } = req.body;
+  const { title, value, type, category, date } = req.body;
 
   const transaction = {
     title,
     value,
     type,
     category,
+    date,
   };
 
   if (req.method === "POST") {
