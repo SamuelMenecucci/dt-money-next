@@ -49,12 +49,13 @@ export function NewTransactionModal({
   }
 
   const categoryValues = [
-    { label: "Food", value: "food" },
-    { label: "Transport", value: "transport" },
-    { label: "Fun", value: "fun" },
-    { label: "Streaming", value: "streaming" },
-    { label: "Home", value: "home" },
-    { label: "Pet", value: "pet" },
+    { label: "Food", value: "Food" },
+    { label: "Transport", value: "Transport" },
+    { label: "Fun", value: "Fun" },
+    { label: "Streaming", value: "Streaming" },
+    { label: "Home", value: "Home" },
+    { label: "Pet", value: "Pet" },
+    { label: "Mamãe", value: "Mãe" },
   ];
 
   return (
