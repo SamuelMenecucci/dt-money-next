@@ -39,6 +39,12 @@ export const Container = styled.div`
           &:first-child {
             color: #363f5f;
           }
+
+          &.category {
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+          }
         }
       }
     }

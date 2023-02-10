@@ -2,9 +2,22 @@ import { api } from "@/services/api";
 import { useTransactionsStore } from "@/store/modal.store.";
 import { useEffect } from "react";
 import { Container } from "./styles";
+import { IoFastFoodOutline } from "react-icons/io5";
+import { MdEmojiTransportation, MdOutlinePets } from "react-icons/md";
+import { GrGamepad } from "react-icons/gr";
+import { AiOutlineYoutube, AiOutlineHome } from "react-icons/ai";
 
 export function TransactionsTable() {
   const { transactions, setTransactions } = useTransactionsStore();
+
+  const CategoryIcons = {
+    Food: <IoFastFoodOutline />,
+    Transport: <MdEmojiTransportation />,
+    Fun: <GrGamepad />,
+    Streaming: <AiOutlineYoutube />,
+    Home: <AiOutlineHome />,
+    Pet: <MdOutlinePets />,
+  };
 
   useEffect(() => {
     api.get("/get-transactions").then((res) => setTransactions(res.data));
@@ -32,7 +45,10 @@ export function TransactionsTable() {
                   currency: "BRL",
                 }).format(element.value)}
               </td>
-              <td>{element.category}</td>
+              <td className="category">
+                {CategoryIcons[element.category]}
+                {element.category}
+              </td>
               <td>
                 {new Date(element.date).toLocaleString("pt-BR", {
                   timeZone: "utc",
