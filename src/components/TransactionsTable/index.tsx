@@ -36,7 +36,7 @@ export function TransactionsTable() {
         </thead>
 
         <tbody>
-          {transactions?.map((element: any, index: number) => (
+          {transactions?.map((element, index: number) => (
             <tr key={index}>
               <td>{element.title}</td>
               <td className={element.type}>
