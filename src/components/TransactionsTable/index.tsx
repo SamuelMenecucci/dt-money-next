@@ -1,6 +1,6 @@
 import { api } from "@/services/api";
 import { useTransactionsStore } from "@/store/modal.store.";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Container } from "./styles";
 
 export function TransactionsTable() {

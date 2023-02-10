@@ -45,7 +45,9 @@ export function NewTransactionModal({
 
     onRequestClose();
 
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   }
 
   const categoryValues = [
