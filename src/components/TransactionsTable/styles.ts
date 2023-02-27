@@ -50,3 +50,8 @@ export const Container = styled.div`
     }
   }
 `;
+
+export const FilterButton = styled.select`
+  padding: 2px 18px;
+  width: 100px;
+`;

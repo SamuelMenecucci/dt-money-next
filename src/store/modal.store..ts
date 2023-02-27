@@ -3,7 +3,7 @@ import { create } from "zustand";
 export type TransactionType = {
   title: string;
   value: number;
-  category: "Pet" | "Transport" | "Fun" | "Streaming" | "Home" | "Food";
+  category: "Pet" | "Transport" | "Fun" | "Streaming" | "Home" | "Food" | "Mãe";
   type: string;
   date: Date;
 };

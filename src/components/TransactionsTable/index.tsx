@@ -1,14 +1,22 @@
 import { api } from "@/services/api";
 import { useTransactionsStore } from "@/store/modal.store.";
-import { useEffect } from "react";
-import { Container } from "./styles";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Container, FilterButton } from "./styles";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { MdEmojiTransportation, MdOutlinePets } from "react-icons/md";
 import { GrGamepad } from "react-icons/gr";
 import { AiOutlineYoutube, AiOutlineHome } from "react-icons/ai";
 
+export type TransactionType = {
+  title: string;
+  value: number;
+  category: "Pet" | "Transport" | "Fun" | "Streaming" | "Home" | "Food" | "Mãe";
+  type: string;
+  date: Date;
+};
+
 export function TransactionsTable() {
-  const { transactions, setTransactions } = useTransactionsStore();
+  const { transactions } = useTransactionsStore();
 
   const CategoryIcons = {
     Food: <IoFastFoodOutline />,
@@ -17,14 +25,41 @@ export function TransactionsTable() {
     Streaming: <AiOutlineYoutube />,
     Home: <AiOutlineHome />,
     Pet: <MdOutlinePets />,
+    Mãe: "",
   };
 
+  const [transactionsTable, setTransactionsTable] = useState<TransactionType[]>(
+    []
+  );
+
   useEffect(() => {
-    api.get("/get-transactions").then((res) => setTransactions(res.data));
-  }, []);
+    setTransactionsTable(transactions);
+  }, [transactions]);
+
+  const handleApplyFilter = (event: { target: { value: string } }) => {
+    let selectedFilter;
+
+    event.target.value === "Mãe"
+      ? (selectedFilter = transactions.filter(
+          (element) => element.category === "Mãe"
+        ))
+      : (selectedFilter = transactions.filter(
+          (element) => element.category !== "Mãe"
+        ));
+
+    setTransactionsTable(selectedFilter);
+  };
 
   return (
     <Container>
+      <FilterButton onChange={handleApplyFilter}>
+        <option value="" selected disabled>
+          Filtros
+        </option>
+
+        <option value="all">Todos</option>
+        <option value="Mãe">Mamãe</option>
+      </FilterButton>
       <table>
         <thead>
           <tr>
@@ -36,7 +71,7 @@ export function TransactionsTable() {
         </thead>
 
         <tbody>
-          {transactions?.map((element, index: number) => (
+          {transactionsTable?.map((element, index: number) => (
             <tr key={index}>
               <td>{element.title}</td>
               <td className={element.type}>
