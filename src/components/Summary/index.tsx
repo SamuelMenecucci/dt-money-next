@@ -9,7 +9,7 @@ import {
 export function Summary() {
   const { transactions } = useTransactionsStore();
 
-  const summaryValues = transactions.reduce(
+  const summaryValues = transactions?.reduce(
     (acc, element) => {
       element.type === "income"
         ? (acc.income += Number(element.value))
@@ -37,7 +37,7 @@ export function Summary() {
           {new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-          }).format(summaryValues.income)}
+          }).format(summaryValues?.income)}
         </SummaryItemValue>
       </SummaryItem>
 
@@ -50,7 +50,7 @@ export function Summary() {
           {new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-          }).format(summaryValues.withdraw)}
+          }).format(summaryValues?.withdraw)}
         </SummaryItemValue>
       </SummaryItem>
 
@@ -63,7 +63,7 @@ export function Summary() {
           {new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-          }).format(summaryValues.total)}
+          }).format(summaryValues?.total)}
         </SummaryItemValue>
       </SummaryItem>
     </Container>
