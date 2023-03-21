@@ -8,6 +8,10 @@ export const Container = styled.div`
   display: flex;
   column-gap: 2rem;
   justify-content: space-around;
+
+  @media (max-width: 720px) {
+    justify-content: space-between;
+  }
 `;
 
 export const SummaryItem = styled.div`
