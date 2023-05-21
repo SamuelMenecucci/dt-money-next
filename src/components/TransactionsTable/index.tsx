@@ -2,10 +2,11 @@ import { api } from "@/services/api";
 import { useTransactionsStore } from "@/store/modal.store.";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Container, FilterButton } from "./styles";
-import { IoFastFoodOutline } from "react-icons/io5";
+import { IoFastFoodOutline, IoSchoolOutline } from "react-icons/io5";
 import { MdEmojiTransportation, MdOutlinePets } from "react-icons/md";
 import { GrGamepad } from "react-icons/gr";
 import { AiOutlineYoutube, AiOutlineHome } from "react-icons/ai";
+import { GiTakeMyMoney } from "react-icons/gi";
 
 export type TransactionType = {
   title: string;
@@ -14,6 +15,18 @@ export type TransactionType = {
   type: string;
   date: Date;
 };
+
+const categoryValues = [
+  { label: "Food", value: "Food" },
+  { label: "Transport", value: "Transport" },
+  { label: "Fun", value: "Fun" },
+  { label: "Streaming", value: "Streaming" },
+  { label: "Home", value: "Home" },
+  { label: "Pet", value: "Pet" },
+  { label: "Educação", value: "Educação" },
+  { label: "Salário", value: "Salário" },
+  { label: "Mamãe", value: "Mãe" },
+];
 
 export function TransactionsTable() {
   const { transactions } = useTransactionsStore();
@@ -26,6 +39,8 @@ export function TransactionsTable() {
     Home: <AiOutlineHome />,
     Pet: <MdOutlinePets />,
     Mãe: "",
+    Educação: <IoSchoolOutline />,
+    Salário: <GiTakeMyMoney />,
   };
 
   const [transactionsTable, setTransactionsTable] = useState<TransactionType[]>(
@@ -37,15 +52,16 @@ export function TransactionsTable() {
   }, [transactions]);
 
   const handleApplyFilter = (event: { target: { value: string } }) => {
+    if (event.target.value === "all") {
+      setTransactionsTable(transactions);
+      return;
+    }
+
     let selectedFilter;
 
-    event.target.value === "Mãe"
-      ? (selectedFilter = transactions.filter(
-          (element) => element.category === "Mãe"
-        ))
-      : (selectedFilter = transactions.filter(
-          (element) => element.category !== "Mãe"
-        ));
+    selectedFilter = transactions.filter(
+      (element) => element.category === event.target.value
+    );
 
     setTransactionsTable(selectedFilter);
   };
@@ -56,9 +72,13 @@ export function TransactionsTable() {
         <option value="" selected disabled>
           Filtros
         </option>
-
         <option value="all">Todos</option>
-        <option value="Mãe">Mamãe</option>
+
+        {categoryValues.map((category) => (
+          <option key={category.value} value={category.value}>
+            {category.label}
+          </option>
+        ))}
       </FilterButton>
       <table>
         <thead>

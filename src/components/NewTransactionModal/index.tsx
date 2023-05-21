@@ -57,6 +57,8 @@ export function NewTransactionModal({
     { label: "Streaming", value: "Streaming" },
     { label: "Home", value: "Home" },
     { label: "Pet", value: "Pet" },
+    { label: "Educação", value: "Educação" },
+    { label: "Salário", value: "Salário" },
     { label: "Mamãe", value: "Mãe" },
   ];
 
